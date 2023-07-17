@@ -1,35 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>ws-nats chat</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-      crossorigin="anonymous"
-    />
-  </head>
-  <!-- when the browser exits, we publish a message -->
-  <body onunload="chat.exiting()">
-    <!-- a form for entering messages -->
-    <div class="container">
-      <h1>ws-nats chat</h1>
-      <input
-        type="text"
-        class="form-control"
-        id="data"
-        placeholder="Message"
-        autocomplete="off"
-      /><br />
-      <button id="send" onclick="chat.send()" class="btn btn-primary">
-        Send
-      </button>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>ws-nats chat</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<!-- when the browser exits, we publish a message -->
+
+<body onunload="chat.exiting()" class="bg-black">
+  <!-- a form for entering messages -->
+  <div class="container p-7">
+    <h1 class="text-white text-5xl py-3 ">Blocktheory - Chat</h1>
+    <div class="mb-6">
+      <!-- <label for="large-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Large input</label> -->
+      <input type="text" id="data" placeholder="Message" autocomplete="off"
+        class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
     </div>
-    <br />
 
-    <!-- a place to record messages -->
-    <div id="chats" class="container"></div>
+    <button id="send" onclick="chat.send()"
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+      Send
+    </button>
+  </div>
+  <br />
 
-    <script type="module" src="chat.js"></script>
-  </body>
+  <!-- a place to record messages -->
+  <div id="chats" class="p-4 text-white"></div>
+
+  <script type="module" src="chat.js"></script>
+</body>
+
 </html>

@@ -29,8 +29,8 @@ const init = async function () {
   // if the connection doesn't resolve, an exception is thrown
   // a real app would allow configuring the hostport and whether
   // to use WSS or not.
-  const conn = await connect({ servers: 'ws://localhost:9222' });
-
+  const conn = await connect({ servers: 'ws://192.168.100.227:9444' });
+//http://192.168.100.227:5173/
   // handle connection to the server is closed - should disable the ui
   conn.closed().then((err) => {
     let m = 'NATS connection closed';
@@ -47,7 +47,7 @@ const init = async function () {
     const chat = conn.subscribe('chat');
     for await (const m of chat) {
       const jm = jc.decode(m.data);
-      addEntry(jm.id === me ? `(me): ${jm.m}` : `(${jm.id}): ${jm.m}`);
+      addEntry(jm.id === me ? `(me): ${jm.m}` : `(${jm.id}): ${jm.m}`, jm.id==me);
     }
   })().then();
 
@@ -113,8 +113,15 @@ function exiting() {
 }
 
 // add an entry to the document
-function addEntry(s) {
+function addEntry(s, me) {
   const p = document.createElement('pre');
   p.appendChild(document.createTextNode(s));
+  p.classList.add("text-black")
+  p.classList.add("bg-white")
+  p.classList.add("m-5")
+  p.classList.add("p-2")
+  if(me) {
+    p.classList.add("text-right")
+  } 
   document.getElementById('chats').appendChild(p);
 }
